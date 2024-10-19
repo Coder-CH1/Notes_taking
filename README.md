@@ -1,6 +1,6 @@
 # Notes_taking
 
-# Features:
+## Features:
  
 - Flutter(User Interface)
 - Hive(Crud operations)
