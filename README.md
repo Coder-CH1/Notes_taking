@@ -1,2 +1,6 @@
 # Notes_taking
-- Notes taking using Flutter Hive crud operations.
+
+# Features:
+ 
+- Flutter(User Interface)
+- Hive(Crud operations)
