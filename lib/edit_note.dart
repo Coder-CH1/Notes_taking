@@ -12,6 +12,11 @@ class _EditNoteState extends State<EditNote> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.black87,
+      body: Column(
+        children: [
+          TextField()
+        ],
+      ),
     );
   }
 }

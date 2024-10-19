@@ -12,6 +12,11 @@ class _NotesState extends State<Notes> {
   Widget build(BuildContext context) {
     return const Scaffold(
       backgroundColor: Colors.black87,
+      body: Column(
+        children: [
+          ListTile()
+        ],
+      ),
     );
   }
 }
