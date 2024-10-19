@@ -10,6 +10,8 @@ class EditNote extends StatefulWidget {
 class _EditNoteState extends State<EditNote> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return const Scaffold(
+      backgroundColor: Colors.black87,
+    );
   }
 }
