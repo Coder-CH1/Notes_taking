@@ -10,11 +10,18 @@ class Notes extends StatefulWidget {
 class _NotesState extends State<Notes> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       backgroundColor: Colors.black87,
       body: Column(
         children: [
-          ListTile()
+          ListView.builder(
+            itemCount: 0,
+            itemBuilder: (context, index) {
+              return const ListTile(
+                title: Text(''),
+              );
+            },
+          )
         ],
       ),
     );
