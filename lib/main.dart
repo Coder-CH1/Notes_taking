@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:notes_taking/database/notes_model.dart';
 import 'package:notes_taking/edit_note.dart';
-import 'package:path_provider/path_provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final appDocumentDirectory = await getApplicationDocumentsDirectory();
-  Hive.init(appDocumentDirectory.path);
+ await Hive.initFlutter();
+  Hive.registerAdapter(NotesModelAdapter());
   runApp(const MyApp());
 }
 
