@@ -5,7 +5,7 @@ import 'package:notes_taking/edit_note.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
- await Hive.initFlutter();
+  await Hive.initFlutter();
   Hive.registerAdapter(NotesModelAdapter());
   runApp(const MyApp());
 }

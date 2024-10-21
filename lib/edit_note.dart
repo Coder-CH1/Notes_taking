@@ -35,18 +35,22 @@ class _EditNoteState extends State<EditNote> {
             const SizedBox(
               height: 100,
             ),
-            TextField(
-              controller: _controller,
-              style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.white,
-              ),
-                decoration: const InputDecoration(
-                  hintText: 'Type notes',
-                  hintStyle: TextStyle(
-                    color: Colors.white24,
-                  ),
+            Padding(
+              padding: const EdgeInsets.only(left: 14, right: 14),
+              child: TextField(
+                controller: _controller,
+                style: const TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
                 ),
+                  maxLines: null,
+                  decoration: const InputDecoration(
+                    hintText: 'Type notes',
+                    hintStyle: TextStyle(
+                      color: Colors.white24,
+                    ),
+                  ),
+              ),
             ),
             const Spacer(),
             ElevatedButton(
