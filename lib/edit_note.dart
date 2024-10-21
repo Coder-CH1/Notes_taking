@@ -4,8 +4,8 @@ import 'package:notes_taking/database/notes_model.dart';
 import 'package:notes_taking/notes.dart';
 
 class EditNote extends StatefulWidget {
-
-  const EditNote({super.key});
+  final NotesModel? existingNotes;
+  const EditNote({super.key, required this.existingNotes});
 
   @override
   State<EditNote> createState() => _EditNoteState();
@@ -22,6 +22,14 @@ class _EditNoteState extends State<EditNote> {
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {
+    final newNotes = NotesModel(
+        description: description,
+        date: DateTime.now());
+    await _notes.addNotes(newNotes);
+    Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNotes)),
+        (routes) => false,
+    );
     }
   }
 
@@ -63,12 +71,7 @@ class _EditNoteState extends State<EditNote> {
                     color: Colors.white,
                   ),),
                 onPressed: () {
-                  final newNotes = NotesModel(
-                      description: '',
-                      date: DateTime.now());
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNotes)),
-                  );
+                  _saveNotes();
                 }
             ),
             const SizedBox(

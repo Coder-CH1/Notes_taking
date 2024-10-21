@@ -30,21 +30,39 @@ class _NotesPageState extends State<NotesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black87,
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: 0,
-              itemBuilder: (context, index) {
-                return const ListTile(
-                  title: Text(''),
-                );
-              },
-            ),
-          )
-        ],
-      ),
-
+      body: FutureBuilder<List<NotesModel>>(
+          future: _noteList,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('${snapshot.hasError}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('Notes not available'));
+            } else {
+              final notes = snapshot.data!;
+              return ListView.builder(
+                itemCount: notes.length,
+                  itemBuilder: (context, index) {
+                  final note = notes[index];
+                  return ListTile(
+                    title: Text(note.description),
+                    subtitle: Text(note.date.toString()),
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => EditNote(existingNotes: note)),
+                      ).then((_) {
+                        setState(() {
+                          _noteList = _fetchNotes();
+                        });
+                      });
+                    },
+                  );
+                  }
+              );
+            }
+          }
+      )
     );
   }
 }
