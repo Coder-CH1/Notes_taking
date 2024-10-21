@@ -6,8 +6,7 @@ import 'edit_note.dart';
 
 class NotesPage extends StatefulWidget {
   final NotesModel? existingNotes;
-  final NotesModel? date;
-  const NotesPage({super.key, required this.existingNotes, required this.date});
+  const NotesPage({super.key, required this.existingNotes});
 
   @override
   State<NotesPage> createState() => _NotesPageState();
@@ -33,13 +32,15 @@ class _NotesPageState extends State<NotesPage> {
       backgroundColor: Colors.black87,
       body: Column(
         children: [
-          ListView.builder(
-            itemCount: 0,
-            itemBuilder: (context, index) {
-              return const ListTile(
-                title: Text(''),
-              );
-            },
+          Expanded(
+            child: ListView.builder(
+              itemCount: 0,
+              itemBuilder: (context, index) {
+                return const ListTile(
+                  title: Text(''),
+                );
+              },
+            ),
           )
         ],
       ),

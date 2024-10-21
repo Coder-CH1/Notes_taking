@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_taking/database/crud.dart';
 import 'package:notes_taking/database/notes_model.dart';
+import 'package:notes_taking/notes.dart';
 
 class EditNote extends StatefulWidget {
 
@@ -70,7 +71,12 @@ class _EditNoteState extends State<EditNote> {
                     color: Colors.white,
                   ),),
                 onPressed: () {
-                  _saveNotes();
+                  final newNotes = NotesModel(
+                      description: '',
+                      date: DateTime.now());
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNotes)),
+                  );
                 }
             ),
             const SizedBox(
