@@ -22,7 +22,16 @@ class _EditNoteState extends State<EditNote> {
   }
 
   void _saveNotes() async {
-
+  final description = _controller.text;
+  if(description.isNotEmpty) {
+    if (widget.existingNotes == null) {
+      final newNote = NotesModel(description: description, date: DateTime.now());
+      await _notes.addNotes(newNote);
+    } else {
+      final updateNote = NotesModel(description: description, date: widget.existingNotes!.date);
+      await _notes.updateNotes(widget.existingNotes!.key, updateNote);
+    }
+  }
   }
 
   @override
