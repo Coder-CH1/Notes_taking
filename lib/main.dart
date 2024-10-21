@@ -47,7 +47,7 @@ class AddNote extends StatelessWidget {
                         description: '',
                         date: DateTime.now());
                     Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes)),
+                      MaterialPageRoute(builder: (context) => EditNote()),
                     );
                   }
               ),

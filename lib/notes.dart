@@ -5,7 +5,9 @@ import 'database/notes_model.dart';
 import 'edit_note.dart';
 
 class NotesPage extends StatefulWidget {
-  const NotesPage({super.key});
+  final NotesModel? existingNotes;
+  final NotesModel? date;
+  const NotesPage({super.key, required this.existingNotes, required this.date});
 
   @override
   State<NotesPage> createState() => _NotesPageState();

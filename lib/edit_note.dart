@@ -3,8 +3,8 @@ import 'package:notes_taking/database/crud.dart';
 import 'package:notes_taking/database/notes_model.dart';
 
 class EditNote extends StatefulWidget {
-  final NotesModel? existingNotes;
-  const EditNote({super.key, required this.existingNotes});
+
+  const EditNote({super.key});
 
   @override
   State<EditNote> createState() => _EditNoteState();
@@ -16,21 +16,19 @@ class _EditNoteState extends State<EditNote> {
   @override
   void initState() {
     super.initState();
-    if (widget.existingNotes != null) {
-      _controller.text = widget.existingNotes!.description;
-    }
+    // if (widget.existingNotes != null) {
+    //   _controller.text = widget.existingNotes!.description;
+    // }
   }
 
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {
-    if (widget.existingNotes == null) {
-      // final newNote = NotesModel(description: description, date: DateTime.now());
-      // await _notes.addNotes(newNote);
-    } else {
-      // final updateNote = NotesModel(description: description, date: widget.existingNotes!.date);
-      // await _notes.updateNotes(widget.existingNotes!.key, updateNote);
-    }
+    // if (widget.existingNotes == null) {
+    //
+    // } else {
+    //
+    // }
   }
   }
 
