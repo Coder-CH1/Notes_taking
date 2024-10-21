@@ -1,14 +1,30 @@
 import 'package:flutter/material.dart';
-import 'notes.dart';
+import 'package:notes_taking/database/crud.dart';
+import 'package:notes_taking/database/notes_model.dart';
 
 class EditNote extends StatefulWidget {
-  const EditNote({super.key});
+  final NotesModel? existingNotes;
+  const EditNote({super.key, required this.existingNotes});
 
   @override
   State<EditNote> createState() => _EditNoteState();
 }
 
 class _EditNoteState extends State<EditNote> {
+  final TextEditingController _controller = TextEditingController();
+  final Notes _notes = Notes();
+  @override
+  void initState() {
+    super.initState();
+    if (widget.existingNotes != null) {
+      _controller.text = widget.existingNotes!.description;
+    }
+  }
+
+  void _saveNotes() async {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,12 +35,13 @@ class _EditNoteState extends State<EditNote> {
             const SizedBox(
               height: 100,
             ),
-            const TextField(
-              style: TextStyle(
+            TextField(
+              controller: _controller,
+              style: const TextStyle(
                   fontSize: 18,
                   color: Colors.white,
               ),
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   hintText: 'Type notes',
                   hintStyle: TextStyle(
                     color: Colors.white24,
@@ -42,9 +59,7 @@ class _EditNoteState extends State<EditNote> {
                     color: Colors.white,
                   ),),
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const NotesPage()),
-                  );
+                  _saveNotes();
                 }
             ),
             const SizedBox(
