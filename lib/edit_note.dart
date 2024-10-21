@@ -17,20 +17,12 @@ class _EditNoteState extends State<EditNote> {
   @override
   void initState() {
     super.initState();
-    // if (widget.existingNotes != null) {
-    //   _controller.text = widget.existingNotes!.description;
-    // }
   }
 
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {
-    // if (widget.existingNotes == null) {
-    //
-    // } else {
-    //
-    // }
-  }
+    }
   }
 
   @override
