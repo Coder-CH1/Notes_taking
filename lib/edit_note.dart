@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'notes.dart';
 
 class EditNote extends StatefulWidget {
   const EditNote({super.key});
@@ -18,7 +19,18 @@ class _EditNoteState extends State<EditNote> {
             const SizedBox(
               height: 100,
             ),
-            const TextField(),
+            const TextField(
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white,
+              ),
+                decoration: InputDecoration(
+                  hintText: 'Type notes',
+                  hintStyle: TextStyle(
+                    color: Colors.white24,
+                  ),
+                ),
+            ),
             const Spacer(),
             ElevatedButton(
                 style: ElevatedButton.styleFrom(
@@ -31,7 +43,7 @@ class _EditNoteState extends State<EditNote> {
                   ),),
                 onPressed: () {
                   Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const EditNote()),
+                    MaterialPageRoute(builder: (context) => const NotesPage()),
                   );
                 }
             ),
