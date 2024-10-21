@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:notes_taking/database/crud.dart';
 
 import 'database/notes_model.dart';
+import 'edit_note.dart';
 
 class NotesPage extends StatefulWidget {
   const NotesPage({super.key});
@@ -40,6 +41,7 @@ class _NotesPageState extends State<NotesPage> {
           )
         ],
       ),
+
     );
   }
 }
