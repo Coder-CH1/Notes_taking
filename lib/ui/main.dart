@@ -48,6 +48,10 @@ class _NotesPageState extends State<NotesPage> {
     return await _notes.getAllNotes();
   }
 
+  void _updateNotes(int index, String description) async {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
