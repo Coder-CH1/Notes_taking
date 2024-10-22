@@ -73,15 +73,16 @@ class _NotesPageState extends State<NotesPage> {
                 return const Center(child: Text('Notes not available'));
               } else {
                 final notes = snapshot.data!;
+                final reversedNotes = notes.reversed.toList();
                 return ListView.builder(
-                    itemCount: notes.length,
+                    itemCount: reversedNotes.length,
                     itemBuilder: (context, index) {
-                      final note = notes[index];
+                      final note = reversedNotes[index];
                       return ListTile(
-                        title: Text(note.description),
+                        title: Text(note.description, style: const TextStyle(color: Colors.white70)),
                         subtitle: Text(note.date.toString()),
                         onTap: () {
-                          final existingNotes = NotesModel(description: note.description, date: DateTime.now());
+                          final existingNotes = note;
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (context) => EditNote(existingNotes: existingNotes)),
                           ).then((_) {
