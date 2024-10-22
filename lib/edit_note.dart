@@ -27,6 +27,7 @@ class _EditNoteState extends State<EditNote> {
         description: description ,
         date: DateTime.now());
     await _notes.addNotes(newNotes);
+    if (!mounted) return;
     Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNotes)),
         (routes) => false,
