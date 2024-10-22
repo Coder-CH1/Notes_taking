@@ -51,6 +51,16 @@ class _NotesPageState extends State<NotesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Notes',
+        style: TextStyle(
+          fontSize: 22,
+          color: Colors.white,
+        ),
+        ),
+        elevation: 0,
+        backgroundColor: Colors.black87,
+      ),
         backgroundColor: Colors.black87,
         body: FutureBuilder<List<NotesModel>>(
             future: _noteList,
@@ -85,15 +95,20 @@ class _NotesPageState extends State<NotesPage> {
               }
             }
         ),
-        floatingActionButton: FloatingActionButton(
-          child: const Icon(Icons.add),
-        onPressed: () {
-          final newNotes = NotesModel(description: "", date: DateTime.now());
-                    Navigator.of(context).push(
-                      MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes)),
-                    );
-        }
-    ),
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(left: 150, right: 150),
+          child: FloatingActionButton(
+            backgroundColor: Colors.grey,
+          foregroundColor: Colors.white,
+          onPressed: () {
+            final newNotes = NotesModel(description: "", date: DateTime.now());
+                      Navigator.of(context).push(
+                        MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes)),
+                      );
+          },
+            child: const Icon(Icons.add)
+              ),
+        ),
     );
   }
 }
