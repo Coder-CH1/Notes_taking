@@ -24,7 +24,6 @@ class _EditNoteState extends State<EditNote> {
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {
-    //if (widget.existingNotes != null) {
       final newNotes = NotesModel(
           description: description ,
           date: DateTime.now());
@@ -34,7 +33,6 @@ class _EditNoteState extends State<EditNote> {
         MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNotes)),
             (routes) => false,
       );
-    //}
     }
   }
 
