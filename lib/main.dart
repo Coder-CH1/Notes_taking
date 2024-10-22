@@ -78,7 +78,7 @@ class _NotesPageState extends State<NotesPage> {
                     itemCount: reversedNotes.length,
                     itemBuilder: (context, index) {
                       final note = reversedNotes[index];
-                      final formattedDate = DateFormat('yyyy-MM--dd').format(note.date);
+                      final formattedDate = DateFormat('dd MMMM yyyy').format(note.date);
                       return ListTile(
                         title: Text(note.description, style: const TextStyle(color: Colors.white70)),
                         subtitle: Text(formattedDate),
