@@ -5,7 +5,8 @@ import 'main.dart';
 
 class EditNote extends StatefulWidget {
   final NotesModel? existingNotes;
-  const EditNote({super.key, required this.existingNotes});
+  final int? index;
+  const EditNote({super.key, required this.existingNotes, required this.index});
 
   @override
   State<EditNote> createState() => _EditNoteState();
@@ -23,15 +24,17 @@ class _EditNoteState extends State<EditNote> {
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {
-    final newNotes = NotesModel(
-        description: description ,
-        date: DateTime.now());
-    await _notes.addNotes(newNotes);
-    if (!mounted) return;
-    Navigator.of(context).pushAndRemoveUntil(
+    //if (widget.existingNotes != null) {
+      final newNotes = NotesModel(
+          description: description ,
+          date: DateTime.now());
+      await _notes.addNotes(newNotes);
+      if (!mounted) return;
+      Navigator.of(context).pushAndRemoveUntil(
         MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNotes)),
-        (routes) => false,
-    );
+            (routes) => false,
+      );
+    //}
     }
   }
 

@@ -84,8 +84,9 @@ class _NotesPageState extends State<NotesPage> {
                         subtitle: Text(formattedDate),
                         onTap: () {
                           final existingNotes = note;
+                          final index = reversedNotes.length;
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => EditNote(existingNotes: existingNotes)),
+                            MaterialPageRoute(builder: (context) => EditNote(existingNotes: existingNotes, index: index)),
                           ).then((_) {
                             setState(() {
                               _noteList = _fetchNotes();
@@ -105,8 +106,9 @@ class _NotesPageState extends State<NotesPage> {
           foregroundColor: Colors.white,
           onPressed: () {
             final newNotes = NotesModel(description: '', date: DateTime.now());
+            const index = 0;
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes)),
+                        MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes, index: index)),
                       );
           },
             child: const Icon(Icons.add)
