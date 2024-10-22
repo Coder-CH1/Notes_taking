@@ -24,7 +24,7 @@ class _EditNoteState extends State<EditNote> {
   final description = _controller.text;
   if(description.isNotEmpty) {
     final newNotes = NotesModel(
-        description: description,
+        description: description ,
         date: DateTime.now());
     await _notes.addNotes(newNotes);
     Navigator.of(context).pushAndRemoveUntil(

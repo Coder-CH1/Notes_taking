@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:intl/intl.dart';
 import 'package:notes_taking/database/notes_model.dart';
 import 'package:notes_taking/edit_note.dart';
-
 import 'database/crud.dart';
 
 Future<void> main() async {
@@ -78,9 +78,10 @@ class _NotesPageState extends State<NotesPage> {
                     itemCount: reversedNotes.length,
                     itemBuilder: (context, index) {
                       final note = reversedNotes[index];
+                      final formattedDate = DateFormat('yyyy-MM--dd').format(note.date);
                       return ListTile(
                         title: Text(note.description, style: const TextStyle(color: Colors.white70)),
-                        subtitle: Text(note.date.toString()),
+                        subtitle: Text(formattedDate),
                         onTap: () {
                           final existingNotes = note;
                           Navigator.of(context).push(
