@@ -17,6 +17,7 @@ class _EditNoteState extends State<EditNote> {
   @override
   void initState() {
     super.initState();
+    _controller.text = widget.existingNotes?.description ?? '';
   }
 
   void _saveNotes() async {
