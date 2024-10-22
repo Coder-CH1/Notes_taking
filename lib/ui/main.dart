@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:intl/intl.dart';
 import 'package:notes_taking/database/notes_model.dart';
-import 'package:notes_taking/edit_note.dart';
-import 'database/crud.dart';
+import 'package:notes_taking/ui/edit_note.dart';
+import '../database/crud.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
