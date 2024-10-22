@@ -3,58 +3,97 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:notes_taking/database/notes_model.dart';
 import 'package:notes_taking/edit_note.dart';
 
+import 'database/crud.dart';
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(NotesModelAdapter());
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+   MyApp({super.key});
 
   // This widget is the root of your application.
+  final newNotes = NotesModel(description: '', date: DateTime.now());
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: AddNote(),
+      home: NotesPage(existingNotes: newNotes),
     );
   }
 }
 
-class AddNote extends StatelessWidget {
-  const AddNote({super.key});
+class NotesPage extends StatefulWidget {
+  final NotesModel? existingNotes;
+  const NotesPage({super.key, required this.existingNotes});
+
+  @override
+  State<NotesPage> createState() => _NotesPageState();
+}
+
+class _NotesPageState extends State<NotesPage> {
+  final Notes _notes = Notes();
+  late Future<List<NotesModel>> _noteList;
+
+  @override
+  void initState() {
+    super.initState();
+    _noteList = _fetchNotes();
+  }
+
+  Future<List<NotesModel>> _fetchNotes() async {
+    return await _notes.getAllNotes();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black87,
-        body: Column(
-          children: [
-            const Spacer(),
-            Center(
-              child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.white10,
-                  ),
-                  child: const Icon(
-                    Icons.add,
-                    color: Colors.white,
-                  ),
-                  onPressed: () {
-                    final newNotes = NotesModel(description: "", date: DateTime.now());
+        backgroundColor: Colors.black87,
+        body: FutureBuilder<List<NotesModel>>(
+            future: _noteList,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('${snapshot.hasError}'));
+              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                return const Center(child: Text('Notes not available'));
+              } else {
+                final notes = snapshot.data!;
+                return ListView.builder(
+                    itemCount: notes.length,
+                    itemBuilder: (context, index) {
+                      final note = notes[index];
+                      return ListTile(
+                        title: Text(note.description),
+                        subtitle: Text(note.date.toString()),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(builder: (context) => EditNote(existingNotes: note)),
+                          ).then((_) {
+                            setState(() {
+                              _noteList = _fetchNotes();
+                            });
+                          });
+                        },
+                      );
+                    }
+                );
+              }
+            }
+        ),
+        floatingActionButton: FloatingActionButton(
+          child: const Icon(Icons.add),
+        onPressed: () {
+          final newNotes = NotesModel(description: "", date: DateTime.now());
                     Navigator.of(context).push(
                       MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes)),
                     );
-                  }
-              ),
-            ),
-            const SizedBox(
-              height: 50,
-            ),
-          ],
-        ),
+        }
+    ),
     );
   }
 }

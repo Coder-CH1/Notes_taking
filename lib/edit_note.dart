@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:notes_taking/database/crud.dart';
 import 'package:notes_taking/database/notes_model.dart';
-import 'package:notes_taking/notes.dart';
+import 'main.dart';
 
 class EditNote extends StatefulWidget {
   final NotesModel? existingNotes;
