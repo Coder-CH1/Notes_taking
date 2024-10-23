@@ -48,9 +48,9 @@ class _NotesPageState extends State<NotesPage> {
     return await _notes.getAllNotes();
   }
 
-  void _updateNotes(int index, String description) async {
-
-  }
+  // void _updateNotes(int index, String description) async {
+  //
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -88,9 +88,10 @@ class _NotesPageState extends State<NotesPage> {
                         subtitle: Text(formattedDate),
                         onTap: () {
                           final existingNotes = note;
+                          final updatedNote = NotesModel(description: existingNotes.description, date: DateTime.now());
                           final actualIndex = reversedNotes.length - 1 - index;
                           Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => EditNote(existingNotes: existingNotes, index: actualIndex)),
+                            MaterialPageRoute(builder: (context) => EditNote(existingNotes: updatedNote, index: actualIndex)),
                           ).then((_) {
                             setState(() {
                               _noteList = _fetchNotes();
@@ -109,10 +110,9 @@ class _NotesPageState extends State<NotesPage> {
             backgroundColor: Colors.grey,
           foregroundColor: Colors.white,
           onPressed: () {
-            final newNotes = NotesModel(description: '', date: DateTime.now());
             const index = 0;
                       Navigator.of(context).push(
-                        MaterialPageRoute(builder: (context) => EditNote(existingNotes: newNotes, index: index)),
+                        MaterialPageRoute(builder: (context) => const EditNote(existingNotes: null, index: null)),
                       );
           },
             child: const Icon(Icons.add)
