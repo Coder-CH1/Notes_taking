@@ -98,10 +98,8 @@ class _NotesPageState extends State<NotesPage> {
                       return Dismissible(
                         key: Key(note.description),
                         background: Container(
-                          color: Colors.red,
+                          color: Colors.white70,
                           alignment: AlignmentDirectional.centerEnd,
-                          padding: const EdgeInsets.only(right: 20),
-                          child: const Icon(Icons.delete, color: Colors.white70),
                         ),
                         onDismissed: (direction) {
                           _deleteNotes(reversedNotes.length - 1 - index);
