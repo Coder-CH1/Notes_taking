@@ -88,7 +88,7 @@ class _NotesPageState extends State<NotesPage> {
                         subtitle: Text(formattedDate),
                         onTap: () {
                           final existingNotes = note;
-                          final actualIndex = reversedNotes.length;
+                          final actualIndex = reversedNotes.length - 1 - index;
                           Navigator.of(context).push(
                             MaterialPageRoute(builder: (context) => EditNote(existingNotes: existingNotes, index: actualIndex)),
                           ).then((_) {
