@@ -101,7 +101,7 @@ class _NotesPageState extends State<NotesPage> {
                           color: Colors.red,
                           alignment: AlignmentDirectional.centerEnd,
                           padding: const EdgeInsets.only(right: 20),
-                          child: const Icon(Icons.delete, color: Colors.red),
+                          child: const Icon(Icons.delete, color: Colors.white70),
                         ),
                         onDismissed: (direction) {
                           _deleteNotes(reversedNotes.length - 1 - index);
