@@ -78,8 +78,13 @@ class _NotesPageState extends State<NotesPage> {
               } else {
                 final notes = snapshot.data!;
                 final reversedNotes = notes.reversed.toList();
-                return ListView.builder(
+                return ListView.separated(
                     itemCount: reversedNotes.length,
+                    separatorBuilder: (context, index) =>
+                      const Divider(
+                       color: Colors.white24,
+                        thickness: 1,
+                      ),
                     itemBuilder: (context, index) {
                       final note = reversedNotes[index];
                       final formattedDate = DateFormat('dd MMMM yyyy').format(note.date);
