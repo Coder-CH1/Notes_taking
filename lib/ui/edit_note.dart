@@ -24,17 +24,13 @@ class _EditNoteState extends State<EditNote> {
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {
-      final updatedNote = NotesModel(
+      final newNote = NotesModel(
           description: description ,
           date: DateTime.now());
-      if (widget.index != null) {
-        await _notes.updateNotes(widget.index!, updatedNote);
-      } else {
-        await _notes.addNotes(updatedNote);
-      }
+      await _notes.addNotes(newNote);
       if (!mounted) return;
       Navigator.of(context).pushAndRemoveUntil(
-        MaterialPageRoute(builder: (context) => NotesPage(existingNotes: updatedNote)),
+        MaterialPageRoute(builder: (context) => NotesPage(existingNotes: newNote)),
             (routes) => false,
       );
     }
