@@ -3,5 +3,5 @@
 ## Features:
  
 - Flutter(User Interface)
-- Hive(Crud operations)
+- Hive(Crud operations create, read, update and delete)
 #
