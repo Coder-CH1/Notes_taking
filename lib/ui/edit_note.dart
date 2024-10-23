@@ -15,12 +15,15 @@ class EditNote extends StatefulWidget {
 class _EditNoteState extends State<EditNote> {
   final TextEditingController _controller = TextEditingController();
   final Notes _notes = Notes();
+
   @override
+//LIFE CYCLE
   void initState() {
     super.initState();
     _controller.text = widget.existingNotes?.description ?? '';
   }
 
+//SAVE AND UPDATE NOTE METHOD
   void _saveNotes() async {
   final description = _controller.text;
   if(description.isNotEmpty) {

@@ -39,18 +39,16 @@ class _NotesPageState extends State<NotesPage> {
   late Future<List<NotesModel>> _noteList;
 
   @override
+//LIFE CYCLE
   void initState() {
     super.initState();
     _noteList = _fetchNotes();
   }
 
+//FETCHING NOTES METHOD
   Future<List<NotesModel>> _fetchNotes() async {
     return await _notes.getAllNotes();
   }
-
-  // void _updateNotes(int index, String description) async {
-  //
-  // }
 
   @override
   Widget build(BuildContext context) {
