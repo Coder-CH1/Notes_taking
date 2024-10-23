@@ -50,6 +50,14 @@ class _NotesPageState extends State<NotesPage> {
     return await _notes.getAllNotes();
   }
 
+//DELETING NOTES METHOD
+  Future<void> _deleteNotes(int index) async {
+    await _notes.deleteNotes(index);
+    setState(() {
+      _noteList = _fetchNotes();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -86,21 +94,37 @@ class _NotesPageState extends State<NotesPage> {
                     itemBuilder: (context, index) {
                       final note = reversedNotes[index];
                       final formattedDate = DateFormat('dd MMMM yyyy').format(note.date);
-                      return ListTile(
-                        title: Text(note.description, style: const TextStyle(color: Colors.white70)),
-                        subtitle: Text(formattedDate),
-                        onTap: () {
-                          final existingNotes = note;
-                          final updatedNote = NotesModel(description: existingNotes.description, date: DateTime.now());
-                          final actualIndex = reversedNotes.length - 1 - index;
-                          Navigator.of(context).push(
-                            MaterialPageRoute(builder: (context) => EditNote(existingNotes: updatedNote, index: actualIndex)),
-                          ).then((_) {
-                            setState(() {
-                              _noteList = _fetchNotes();
-                            });
-                          });
+
+                      return Dismissible(
+                        key: Key(note.description),
+                        background: Container(
+                          color: Colors.red,
+                          alignment: AlignmentDirectional.centerEnd,
+                          padding: const EdgeInsets.only(right: 20),
+                          child: const Icon(Icons.delete, color: Colors.red),
+                        ),
+                        onDismissed: (direction) {
+                          _deleteNotes(reversedNotes.length - 1 - index);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(content: Text('${note.description} deleted'))
+                          );
                         },
+                        child: ListTile(
+                          title: Text(note.description, style: const TextStyle(color: Colors.white70)),
+                          subtitle: Text(formattedDate),
+                          onTap: () {
+                            final existingNotes = note;
+                            final updatedNote = NotesModel(description: existingNotes.description, date: DateTime.now());
+                            final actualIndex = reversedNotes.length - 1 - index;
+                            Navigator.of(context).push(
+                              MaterialPageRoute(builder: (context) => EditNote(existingNotes: updatedNote, index: actualIndex)),
+                            ).then((_) {
+                              setState(() {
+                                _noteList = _fetchNotes();
+                              });
+                            });
+                          },
+                        ),
                       );
                     }
                 );
