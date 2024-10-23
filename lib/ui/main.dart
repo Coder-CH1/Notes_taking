@@ -105,9 +105,6 @@ class _NotesPageState extends State<NotesPage> {
                         ),
                         onDismissed: (direction) {
                           _deleteNotes(reversedNotes.length - 1 - index);
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(content: Text('${note.description} deleted'))
-                          );
                         },
                         child: ListTile(
                           title: Text(note.description, style: const TextStyle(color: Colors.white70)),
