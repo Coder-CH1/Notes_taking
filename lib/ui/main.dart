@@ -110,7 +110,6 @@ class _NotesPageState extends State<NotesPage> {
             backgroundColor: Colors.grey,
           foregroundColor: Colors.white,
           onPressed: () {
-            const index = 0;
                       Navigator.of(context).push(
                         MaterialPageRoute(builder: (context) => const EditNote(existingNotes: null, index: null)),
                       );
